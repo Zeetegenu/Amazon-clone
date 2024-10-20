@@ -27,6 +27,7 @@ function Product() {
           <ProductCard 
           key={product.id}
           product = {product}
+          renderAdd={true}
           />
         ))}
       </section>)

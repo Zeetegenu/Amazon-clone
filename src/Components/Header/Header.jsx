@@ -8,8 +8,9 @@ import { FaSearch } from "react-icons/fa";
 import { SlLocationPin } from 'react-icons/sl';
 import LowerHeader from './LowerHeader';
 import { DataContext } from '../DataProvider/DataProvider';
+import { auth } from '../../Utility/firebase';
 function Header() {
-    const [{basket},dispatch] = useContext(DataContext)
+    const [{user,basket},dispatch] = useContext(DataContext)
     const totalItem = basket?.reduce((amount,item)=>{
         return item.amount + amount
     },0)
@@ -37,7 +38,7 @@ function Header() {
                     <option value="">All</option>
                 </select>
                 <input type="text" name='' id='' placeholder='search Amazon'/>
-                <BsSearch size={25}/>
+                <BsSearch size={38}/>
             </div>
             <div className={classes.order__container}>
                 <Link to="" className={classes.language}>
@@ -46,12 +47,23 @@ function Header() {
                         <option value="">EN</option>
                     </select>
                     </Link>
-                <Link to="/auth">
-                    <div>
-                        <p>Sign In</p>
-                        <span>Account & Lists</span>
-                    </div>
-                </Link>
+                    <Link to={!user && "/auth"}>
+              <div>
+                {user ? (
+                  <>
+                    <p>Hello {user?.email?.split("@")[0]}</p>
+                    <span onClick={() => auth.signOut()}>
+                      Sign Out
+                    </span>
+                  </>
+                ) : (
+                  <>
+                    <p>Hello, Sign In</p>
+                    <span>Account & Lists</span>
+                  </>
+                )}
+              </div>
+            </Link>
                 <Link to="/orders">
                     <p>returns</p>
                     <span>& Orders</span>

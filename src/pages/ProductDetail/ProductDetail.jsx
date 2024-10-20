@@ -4,6 +4,7 @@ import axios from "axios"
 import { ProductUrl } from '../../Api/endPoints'
 import ProductCard from '../../Components/Product/ProductCard'
 import Loader from '../../Components/Loader/Loader'
+import LayOut from '../../Components/Layout/LayOut'
 
 function ProductDetail() {
   const { productId } = useParams()
@@ -29,17 +30,17 @@ function ProductDetail() {
   },[])
   console.log("this is products",products)
   return (
-    <>
+    <LayOut>
     {
       isLoading ? (<Loader />):( products?.map((product)=>{
-        return <ProductCard key={product.id}  product = {product} flex = {true}/>
+        return <ProductCard key={product.id}  product = {product} flex = {true} renderAdd={true}/>
        }))
      
 
 
     }
     
-    </>
+    </LayOut>
   )  
 }
 

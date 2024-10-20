@@ -7,6 +7,7 @@ import classes from "./cart.module.css"
 import { Type } from '../../Utility/action.type'
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
+import LayOut from '../../Components/Layout/LayOut'
 
 function Cart() {
   const [{basket,user},dispatch] = useContext(DataContext)
@@ -28,6 +29,8 @@ const decrement = (id)=>{
 }
 
   return (
+    <LayOut>
+   
     <section className={classes.container}>
         <div className={classes.cart__container}>
           <h2>Hello</h2>
@@ -39,7 +42,7 @@ const decrement = (id)=>{
                 basket?.map((item,i)=>{
                   return <section className={classes.cart_product}>
 
-                    <ProductCard key={i} product={item} flex={true} renderAdd={true}/>
+                    <ProductCard key={i} product={item} flex={true} renderAdd={false}/>
                     <div className={classes.btn_container}>
                       <button className={classes.btn}  onClick={()=>increment(item)}><IoIosArrowUp size={20}/></button>
                       <span>{item.amount}</span>
@@ -69,6 +72,7 @@ const decrement = (id)=>{
 
         </div>
     </section>
+    </LayOut>
   )
 }
 

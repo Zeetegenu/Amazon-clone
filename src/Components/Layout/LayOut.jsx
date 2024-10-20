@@ -1,13 +1,13 @@
 import React from 'react'
-import Header from '../Components/Header/Header'
+import Header from '../Header/Header'
 import { Outlet } from 'react-router-dom'
 
 function LayOut({children}) {
   return (
     <div>
       <Header />
-      {/* {children} */}
-      <Outlet />
+      {children}
+      {/* <Outlet /> */}
     </div>
   )
 }
